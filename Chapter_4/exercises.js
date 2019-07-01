@@ -1,7 +1,4 @@
 /***** The Sum of a Range *****/
-/*
-Next, write a sum function that takes an array of numbers and returns the sum of these numbers. Run the example program and see whether it does indeed return 55.
-*/
 
 // Write a range function that takes two arguments, start and end, and returns an array containing all the numbers from start up to (and including) end.
 
@@ -17,6 +14,8 @@ const range = (start, end) => {
 // console.log(range(1, 10))
 
 
+// Next, write a sum function that takes an array of numbers and returns the sum of these numbers. Run the example program and see whether it does indeed return 55.
+
 const sum = (arr) => {
     // Solving with recursion
     if (arr.length === 0) return 0
@@ -29,7 +28,6 @@ const sum = (arr) => {
     // }
     // return sum
 }
-
 // console.log(sum(range(1, 10))) // logs 55
 
 
@@ -37,6 +35,7 @@ const sum = (arr) => {
 As a bonus assignment, modify your range function to take an optional third argument that indicates the “step” value used when building the array. If no step is given, the elements go up by increments of one, corresponding to the old behavior. The function call range(1, 10, 2) should return [1, 3, 5, 7, 9]. Make sure it also works with negative step values so that range(5, 2, -1) produces [5, 4, 3, 2]. 
 */
 
+// INCOMPLETE
 const bonusRange = (start, end, step = 1) => {
     // Only works when start < end and positive step
     const array = []
@@ -52,11 +51,8 @@ const bonusRange = (start, end, step = 1) => {
 
 /***** Reversing an Array *****/
 /*
-Arrays have a reverse method that changes the array by inverting the order in which its elements appear.
 For this exercise, write two functions, reverseArray and reverseArrayInPlace.
 The first, reverseArray, takes an array as argument and produces a new array that has the same elements in the inverse order.
-The second, reverseArrayInPlace, does what the reverse method does: it modifies the array given as argument by reversing its elements. Neither may use the standard reverse method.
-Thinking back to the notes about side e ects and pure functions in the previous chapter, which variant do you expect to be useful in more situations? Which one runs faster?
 */
 
 const reverseArray = (arr) => {
@@ -69,6 +65,9 @@ const reverseArray = (arr) => {
 // console.log(reverseArray([1, 2, 3, 4, 5]))
 
 
+/*
+The second, reverseArrayInPlace, does what the reverse method does: it modifies the array given as argument by reversing its elements. Neither may use the standard reverse method.
+*/
 
 const reverseArrayInPlace = (arr) => {
     for (let i = 0; i < arr.length / 2; i++) {
@@ -78,17 +77,11 @@ const reverseArrayInPlace = (arr) => {
     }
     return arr
 }
-
 // console.log(reverseArrayInPlace([1, 2, 3, 4, 5]))
 
 
 /***** A List *****/
-/*
-Objects, as generic blobs of values, can be used to build all sorts of data structures.
-A common data structure is the list (not to be confused with array).
-A list is a nested set of objects, with the first object holding a reference to the second, the second to the third, and so on.
-*/
-
+// Example
 let list = {
     value: 1, 
     rest: {
@@ -101,21 +94,46 @@ let list = {
 }
 
 /*
-A nice thing about lists is that they can share parts of their structure. For example, if I create two new values {value: 0, rest: list} and {value: -1, rest: list} (with list referring to the binding de ned earlier), they are both independent lists, but they share the structure that makes up their last three elements. The original list is also still a valid three-element list.
-Write a function arrayToList that builds up a list structure like the one shown when given [1, 2, 3] as argument. Also write a listToArray function that produces an array from a list. Then add a helper function prepend, which takes an element and a list and creates a new list that adds the element to the front of the input list, and nth, which takes a list and a number and returns the element at the given position in the list (with zero referring to the  rst element) or undefined when there is no such element.
-If you haven’t already, also write a recursive version of nth. */
+Write a function arrayToList that builds up a list structure like the one shown when given [1, 2, 3] as argument.  
+*/
 
 const arrayToList = (arr) => {
     // Each list element can be decribed as a "node" with two properties
     // The first is the value of the node
     // The second is the "pointer" linking the current node to the next node in the list
-    if (arr.length === 0) {
-        return null
-    }
+    if (arr.length === 0) return null
     const node = {}
     node["value"] = arr[0]
     node["rest"] = arrayToList(arr.slice(1))
     return node
 }
+// console.log(arrayToList([1, 2, 3]))
 
-console.log(arrayToList([1, 2, 3]))
+/*
+Also write a listToArray function that produces an array from a list.
+*/
+const listToArray = (obj) => {
+    const array = []
+    // push list.value into array
+    array.push(obj.value)
+    array.push(obj.rest.value)
+    array.push(obj.rest.rest.value)
+    // access list.rest
+    return array
+}
+const testList = arrayToList([1, 2, 3])
+// console.log(testList)
+// console.log(listToArray(testList))
+
+/*
+Then add a helper function prepend, which takes an element and a list and creates a new list that adds the element to the front of the input list, and nth, which takes a list and a number and returns the element at the given position in the list (with zero referring to the first element) or undefined when there is no such element.
+If you haven’t already, also write a recursive version of nth.
+*/
+
+const prepend = (list, item) => {
+    return {
+        value: item,
+        rest: list
+    }
+}
+console.log(prepend(testList, 5))
