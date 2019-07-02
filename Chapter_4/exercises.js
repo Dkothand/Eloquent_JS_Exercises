@@ -114,15 +114,13 @@ Also write a listToArray function that produces an array from a list.
 */
 const listToArray = (obj) => {
     const array = []
-    // push list.value into array
-    array.push(obj.value)
-    array.push(obj.rest.value)
-    array.push(obj.rest.rest.value)
-    // access list.rest
+    while (obj !== null) {
+        array.push(obj.value)
+        obj = obj.rest
+    }
     return array
 }
 const testList = arrayToList([1, 2, 3])
-// console.log(testList)
 // console.log(listToArray(testList))
 
 /*
@@ -136,4 +134,13 @@ const prepend = (list, item) => {
         rest: list
     }
 }
-console.log(prepend(testList, 5))
+// console.log(prepend(testList, 5))
+
+
+const nth = (list, element) => {
+    // how to iterate over a linked list?
+    // if element === 0, return first value
+    // if element === 1, return list.rest.value
+    // if element === 3, return list.rest.rest.value
+    // if element === 4, return list.rest.rest.rest.value
+}
