@@ -96,11 +96,7 @@ let list = {
 /*
 Write a function arrayToList that builds up a list structure like the one shown when given [1, 2, 3] as argument.  
 */
-
 const arrayToList = (arr) => {
-    // Each list element can be decribed as a "node" with two properties
-    // The first is the value of the node
-    // The second is the "pointer" linking the current node to the next node in the list
     if (arr.length === 0) return null
     const node = {}
     node["value"] = arr[0]
@@ -125,7 +121,6 @@ const testList = arrayToList([1, 2, 3])
 
 /*
 Then add a helper function prepend, which takes an element and a list and creates a new list that adds the element to the front of the input list, and nth, which takes a list and a number and returns the element at the given position in the list (with zero referring to the first element) or undefined when there is no such element.
-If you haven’t already, also write a recursive version of nth.
 */
 
 const prepend = (list, item) => {
@@ -138,9 +133,11 @@ const prepend = (list, item) => {
 
 
 const nth = (list, element) => {
-    // how to iterate over a linked list?
-    // if element === 0, return first value
-    // if element === 1, return list.rest.value
-    // if element === 3, return list.rest.rest.value
-    // if element === 4, return list.rest.rest.rest.value
+    // obj is element === 0
+    // obj.rest is next element
 }
+
+
+/*
+If you haven’t already, also write a recursive version of nth.
+*/
